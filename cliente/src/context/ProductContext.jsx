@@ -17,6 +17,20 @@ function reducer(state, action) {
                 object: products.reduce((object, product) => ({...object, [product.id_producto]: product}), {})
             };
             return newState;
+
+        }
+        
+        case 'add' : {
+            const id = action.payload.id_producto;
+            const newState = {
+                order : [...state.order, id],
+                object : {
+                    ...state.object,
+                    [id] : {id, ...action.payload}
+                }
+            }
+            return newState;
+
         }
 
         default: 

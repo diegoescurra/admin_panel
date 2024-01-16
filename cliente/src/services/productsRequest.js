@@ -8,15 +8,19 @@ export async function fetchProducts() {
 
 
 export async function insertProducts(data){
-    const res = await fetch(URL, {
-        headers: {
-            "Content-Type" : "application/json"
-        },
-        method: "POST",
-        body: JSON.stringify(data) 
-    })
-    const json = await res.json();
-    return json;
+    try {
+        const res = await fetch(URL, {
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify(data) 
+        })
+        const json = await res.json();
+        return json;
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 export async function updateProducts(data) {

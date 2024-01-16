@@ -15,15 +15,15 @@ router.get("/productos", async (req, res) => {
 
 router.post('/productos', async (req, res) => {
     try {
-        const {producto, precio, categoria} = req.body;
+        const {nombre_producto, precio, id_categoria} = req.body;
         
         const sql = "INSERT INTO producto (nombre_producto, precio, id_categoria) VALUES ($1, $2, $3) returning *" 
-        const values = [producto, precio, categoria]
+        const values = [nombre_producto, precio, id_categoria]
         const newProduct = await pool.query(sql, values);
         res.status(200).json(newProduct.rows[0]);
 
     } catch (error) {
-        return res.send(500).send('Error interno del servidor');
+        return res.sendStatus(500).send(error);
     }
 });
 
