@@ -1,21 +1,21 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Layout } from "./components/Layout";
 import { Products } from "./pages/Products";
-import { Sidebar } from "./components/Sidebar";
 import Modal from "./components/shared/Modal";
 import FormProducto from "./components/FormProducto";
+import Categories from "./pages/Categories";
+import Layout from "./components/Layout";
 
 function App() {
 
 
 
-
   return (
     <BrowserRouter>
-      <Sidebar />
+      
     <Routes>      
-      <Route path="/productos" element={< Products/>} />
+      <Route path="/" element={<Layout />} >
+      <Route path="/productos" index element={< Products/>} />
       <Route path="/productos/agregar" element={
         <Modal>
           <FormProducto />
@@ -27,7 +27,8 @@ function App() {
           <FormProducto />
         </Modal>
       } />
-      
+      <Route path="/categorias" element={<Categories />} />
+      </Route> 
     </Routes>
     
     </BrowserRouter>

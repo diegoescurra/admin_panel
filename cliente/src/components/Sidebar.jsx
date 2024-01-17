@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'
 import './sidebar.css'
 
 
-export const Sidebar = () => {
+const Sidebar = () => {
 
 
 
@@ -25,17 +25,7 @@ export const Sidebar = () => {
             <span>Dashboard</span>
           </NavLink>
         </li>
-        <li>
-        <NavLink
-            to={'/usuarios'}
-            className={({isActive}) => 
-              isActive ? "active" : "unActive"
-            }
-          >
-           
-            <span>Usuarios</span>
-          </NavLink>
-        </li>
+       
         <li>
         <NavLink
             to={'/categorias'}
@@ -64,13 +54,10 @@ export const Sidebar = () => {
       <span className="text-sm text-gray-600 dark:text-gray-400">
        <strong>admin</strong>
       </span>
-      <a
-        className="text-sm font-medium text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
-        href="#"
-      >
-        Cerrar Sesión
-      </a>
+      
     </footer>
   </aside>
   )
 }
+
+export default Sidebar

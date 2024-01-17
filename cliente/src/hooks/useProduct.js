@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import { fetchProducts } from "../services/productsRequest";
-import { useContext } from "react";
-import { Context } from "../context/ProductContext";
+import { useProductContext } from "./useProductsContext";
 
-const useFetchProducts = () => {
+const useProduct = () => {
 
-    const [state, dispatch] = useContext(Context);
+    const [state, dispatch] = useProductContext()
 
     useEffect(() => {
       async function getProducts() {
@@ -17,7 +16,7 @@ const useFetchProducts = () => {
   
     }, [dispatch]);
 
-    return state  
+    return {state, dispatch }
 }
 
-export default useFetchProducts
+export default useProduct

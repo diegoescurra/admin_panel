@@ -20,7 +20,7 @@ router.post('/productos', async (req, res) => {
         const sql = "INSERT INTO producto (nombre_producto, precio, id_categoria) VALUES ($1, $2, $3) returning *" 
         const values = [nombre_producto, precio, id_categoria]
         const newProduct = await pool.query(sql, values);
-        res.status(200).json(newProduct.rows[0]);
+        return res.status(200).json(newProduct.rows[0]);
 
     } catch (error) {
         return res.sendStatus(500).send(error);
@@ -29,16 +29,28 @@ router.post('/productos', async (req, res) => {
 
 router.put('/productos', async (req, res) => {
     try {
-        const {producto, precio, categoria} = req.body;
-        const { id } = req.params;
-        const sql = 'UPDATE producto SET nombre_producto = $1, precio = $2, id_categoria = $3 WHERE id = $4 returning *';
-        const values = [producto, precio, categoria, id];
+        const {nombre_producto, precio, id_categoria, id_producto} = req.body;
+        const sql = 'UPDATE producto SET nombre_producto = $1, precio = $2, id_categoria = $3 WHERE id_producto = $4 returning *';
+        const values = [nombre_producto, precio, id_categoria, id_producto];
         const product = await pool.query(sql, values)
-        res.status(200).json(product.rows[0]);
+        console.log(product)
+        return res.status(200).json(product.rows[0]);
 
     } catch (error) {
         console.log(error)
     }
+});
+
+router.delete('/productos', async (req, res) => {
+  try {
+    const {producto_id} = req.body
+    const sql = 'UPDATE producto SET estado = 0 WHERE id_producto = $1';
+    const values = [producto_id];
+    await pool.query(sql, values)
+    return res.status(200);
+  } catch (error) {
+    console.log(error)
+  }
 })
 
 export default router;

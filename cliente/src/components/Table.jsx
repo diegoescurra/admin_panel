@@ -1,6 +1,5 @@
-import {Link} from 'react-router-dom'
 
-const Table = ({rows, columns}) => {
+const Table = ({rows, columns, renderCell}) => {
 
   return (
     <table className="w-full text-left border-collapse">
@@ -25,12 +24,8 @@ const Table = ({rows, columns}) => {
                 </td>
             ))}
             <td className="py-4 px-6 border-b border-grey-light flex gap-2">
-               <Link to={`/productos/editar/${row.id}`} className="bg-gray-700 text-white p-2 rounded hover:bg-gray-500">
-                Editar
-               </Link>
-               <Link className="bg-gray-700 text-white p-2 rounded hover:bg-gray-500">
-                Borrar
-               </Link>
+               {renderCell(row.id)}
+               
             </td>
         </tr>
       ))}
