@@ -16,7 +16,7 @@ const Sidebar = () => {
       <ul className="space-y-1">
         <li>
         <NavLink
-            to={'/dashboard'}
+            to={'/'}
             className={({isActive}) => 
               isActive ? "active" : "unActive"
             }

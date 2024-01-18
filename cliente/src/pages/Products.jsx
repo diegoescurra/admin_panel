@@ -39,35 +39,32 @@ export const Products = () => {
 
   return (
     <>
-      <div className="flex flex-col space-y-1.5 p-6">
-        <h3 className="text-2xl font-semibold leading-none tracking-tight">
-          Gestión de Productos
-        </h3>
-      </div>
-      <div className="p-6 w-full">
-        <div className="flex justify-around pb-4">
+      <div className="flex flex-col p-6">
+        <h3 className="text-2xl font-semibold mb-4">Gestión de Productos</h3>
+        <div className="flex items-center justify-between">
           <Link
             to="/productos/agregar"
-            className="shadow-lg rounded p-2 text-sm"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             + Añadir Producto
           </Link>
-          <div className="relative flex w-full max-w-md">
+          <div className="relative w-full max-w-lg">
             <input
               type="text"
-              className="h-10 border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 block w-full pl-10 pr-10 sm:text-sm rounded-md"
-              placeholder="Buscar"
+              className="h-10 border border-gray-300 bg-white px-5 pr-10 text-sm rounded-lg shadow-sm w-full focus:outline-none focus:ring-2 focus:ring-gray-500 focus:gray-emerald-900"
+              placeholder="Buscar producto..."
               onChange={(e) => setSearchInput(e.target.value)}
               value={searchInput}
             />
           </div>
         </div>
-        <Table
-          columns={["Producto", "Precio", "Categoría", "Acciones"]}
-          rows={rows}
-          renderCell={renderCell}
-        />
       </div>
+
+      <Table
+        columns={["Producto", "Precio", "Categoría", "Acciones"]}
+        rows={rows}
+        renderCell={renderCell}
+      />
     </>
   );
 };
