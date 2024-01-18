@@ -1,2 +1,2 @@
 servidor/.env
-servidor/node_modules
+servidor/node_modulesgit rm -r --cached node_modules
