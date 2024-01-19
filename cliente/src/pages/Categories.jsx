@@ -4,14 +4,27 @@ import useCategory from '../hooks/useCategory'
 
 const Categories = () => {
 
-    const { stateCategory } = useCategory();
+    const { stateCategory, isLoading } = useCategory();
+    let rows = []
 
-    const rows = Object.values(stateCategory.object).map(category => ({
+     if (stateCategory.object && Object.keys(stateCategory.object).length > 0) {
+      rows = Object.values(stateCategory.object).map(category => ({
         id: category.id_categoria,
         col2: category.categoria
     }))
+     }
 
+     const renderCell = (id) => (
+      <Link to={`/categorias/editar/${id}`}
+      className='bg-gray-700 text-white p-2 rounded hover:bg-gray-500'
+      >
+        Editar
+      </Link>
+     )
 
+if (isLoading) {
+  return <>Cargando</>
+}
   return (
     <>
       <div className="flex flex-col p-6">
@@ -30,8 +43,9 @@ const Categories = () => {
       </div>
     
     <Table 
-        columns={["ID", "Categoria"]}
+        columns={["Categoria", "Acciones"]}
         rows={rows}
+        renderCell={renderCell}
     />
     </>
   )

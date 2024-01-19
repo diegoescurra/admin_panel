@@ -12,4 +12,18 @@ router.get('/categorias', async (req, res) => {
     }
 })
 
+
+router.post('/categorias', async (req, res) => {
+    try {
+        const sql = 'INSERT INTO categoria (categoria) VALUES ($1) returning *';
+        const {categoria} = req.body;
+        const values = [categoria]
+        const newCategory = await pool.query(sql, values);
+        return res.status(200).json(newCategory.rows[0])
+        
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 export default router;

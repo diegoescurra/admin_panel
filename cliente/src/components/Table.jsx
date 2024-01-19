@@ -31,12 +31,13 @@ const Table = ({rows, columns, renderCell }) => {
     {currentRows.map((row, rowIndex) => (
       <tr key={row.id || rowIndex} className="hover:bg-gray-100">
         {Object.values(row).map((cell, cellIndex) => (
+          cell.length > 0 &&
           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" key={cellIndex}>
             {cell}
           </td>
         ))}
-       {renderCell &&
-        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+       {renderCell && 
+        <td className="px-6 py-4 whitespace-nowrap  text-sm font-medium">
         {renderCell(row.id)}
       </td>
        }

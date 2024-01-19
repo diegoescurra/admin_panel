@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Table from "../components/Table";
 import { Link } from "react-router-dom";
 import useProduct from "../hooks/useProduct";
@@ -7,14 +7,15 @@ export const Products = () => {
   const [searchInput, setSearchInput] = useState("");
   const { state } = useProduct();
 
-  const filteredProducts =
-    searchInput !== null && searchInput.length > 0
+  const filteredProducts = useMemo(() => {
+    return searchInput !== null && searchInput.length > 2
       ? Object.values(state.object).filter((product) => {
           return product.nombre_producto
             .toLowerCase()
             .includes(searchInput.toLowerCase());
         })
       : state.object;
+  }, [searchInput, state.object]);
 
   const rows = Object.values(filteredProducts).map((product) => ({
     id: product.id_producto,
@@ -26,15 +27,18 @@ export const Products = () => {
     col4: product.categoria,
   }));
 
-  const renderCell = (id) => (
-    <>
-      <Link
-        to={`/productos/editar/${id}`}
-        className="bg-gray-700 text-white p-2 rounded hover:bg-gray-500"
-      >
-        Editar
-      </Link>
-    </>
+  const renderCell = useCallback(
+    (id) => (
+      <>
+        <Link
+          to={`/productos/editar/${id}`}
+          className="bg-gray-700 text-white p-2 rounded hover:bg-gray-500"
+        >
+          Editar
+        </Link>
+      </>
+    ),
+    []
   );
 
   return (
