@@ -38,6 +38,7 @@ router.put('/productos', async (req, res) => {
 
     } catch (error) {
         console.log(error)
+        return res.status(500).send('Lo sentimos, ha ocurrido un error')
     }
 });
 

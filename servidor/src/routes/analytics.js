@@ -28,14 +28,18 @@ router.get('/dashboard', async (req, res) => {
         LIMIT 1`
         const maxCategory = await pool.query(sqlMaxCategory);
 
+
+        const sqlProducts = 'SELECT p.nombre_producto, SUM(v.cantidad ) AS cantidad FROM producto p JOIN venta_detalle v ON p.id_producto = v.id_producto GROUP BY nombre_producto ORDER BY cantidad'
+        const soldProducts = await pool.query(sqlProducts)
+
         return res.status(200).json({
             producto : producto.rows[0],
             sumTotal : sumTotal.rows[0],
-            maxCategory : maxCategory.rows[0]
+            maxCategory : maxCategory.rows[0],
+            soldProducts: soldProducts.rows
 
         })
     } catch (error) {
-        console.log(error)
         return res.status(500).send('Lo sentimos, ha ocurrido un error')
     }
 })

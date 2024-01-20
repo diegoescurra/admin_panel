@@ -22,7 +22,20 @@ router.post('/categorias', async (req, res) => {
         return res.status(200).json(newCategory.rows[0])
         
     } catch (error) {
-        console.log(error)
+        res.status(500).send('Lo sentimos, ha ocurrido un error')
+    }
+});
+
+
+router.put('/categorias', async (req, res) => {
+    try {
+        const sql = 'UPDATE categoria SET categoria = $1 WHERE id_categoria = $2 returning *'
+        const {categoria, id_categoria} = req.body;
+        const values = [categoria, id_categoria];
+        const category = await pool.query(sql, values);
+        return res.status(200).json(category.rows[0])
+    } catch (error) {
+        res.status(500).send('Lo sentimos, ha ocurrido un error')
     }
 })
 
