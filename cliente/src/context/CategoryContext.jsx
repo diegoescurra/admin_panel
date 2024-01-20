@@ -26,13 +26,23 @@ function reducer(state, action) {
     }
 
     case "add": {
-        console.log(action.payload)
       const id = action.payload.id_categoria;
       const newState = {
         order: [...state.order, id],
         object: { ...state.object, [id]: { id, ...action.payload } },
       };
       return newState;
+    }
+
+    case "update" : {
+      const id = action.payload.id_categoria;
+      state.object[id] = {
+        ...state.object[id],
+        ...action.paylaod
+      }
+      const newState = {...state}
+      return newState
+
     }
     default:
       throw new Error();

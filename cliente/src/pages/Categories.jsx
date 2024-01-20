@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Table from '../components/Table'
 import useCategory from '../hooks/useCategory'
+import Loading from '../components/shared/Loading';
 
 const Categories = () => {
 
@@ -22,9 +23,7 @@ const Categories = () => {
       </Link>
      )
 
-if (isLoading) {
-  return <>Cargando</>
-}
+     
   return (
     <>
       <div className="flex flex-col p-6">

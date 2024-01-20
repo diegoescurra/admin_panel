@@ -10,7 +10,6 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "show": {
-      console.log(action.payload)
       const products = action.payload ? action.payload : [];
       const newState = {
         order: products.map((product) => product.id_producto),
@@ -23,7 +22,6 @@ function reducer(state, action) {
     }
 
     case "add": {
-      console.log(action.payload)
       const id = action.payload.id_producto;
       const newState = {
         order: [...state.order, id],

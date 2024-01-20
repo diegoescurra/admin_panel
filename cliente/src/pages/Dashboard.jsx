@@ -1,44 +1,70 @@
-import React, { useEffect, useState } from "react";
 import Card from "../components/shared/Card";
-import { fetchDashboard } from "../services/dashboardRequest";
+
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import useDashboard from "../hooks/useDashboard";
+import Loading from "../components/shared/Loading";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const Dashboard = () => {
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const { data, isLoading } = useDashboard();
 
-  useEffect(() => {
-    async function getMaxProduct() {
-      setIsLoading(true);
-      try {
-        const data = await fetchDashboard();
-        setData(data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    getMaxProduct();
-  }, []);
+  const options = {
+    responsive: true,
+    aspectRatio: 16 / 9,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+    },
+  };
 
-  console.log(data);
+  const labels = data.soldProducts.map((sp) => sp.nombre_producto);
+
+  const dataGraph = {
+    labels,
+    datasets: [
+      {
+        label: "Productos Vendidos",
+        data: data && data.soldProducts.map((sp) => sp.cantidad),
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+    ],
+  };
+
   const fechaActual = new Date();
   const nombre_mes = fechaActual.toLocaleString("es", { month: "long" });
 
-  if (isLoading) {
-    return <>Cargando</>;
-  }
-
+ if (isLoading) return <Loading />
   return (
     <>
       {data ? (
-        <div>
+        <>
           <div className="flex flex-col p-6">
             <h3 className="text-2xl font-semibold mb-4 capitalize">
               Dashboard de {nombre_mes}
             </h3>
           </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-screen-xl mx-auto p-4">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-screen-xl mx-auto p-4 mb-10">
             <Card
               title={"Objetivo"}
               content={"$30.000.000"}
@@ -61,11 +87,16 @@ const Dashboard = () => {
               content={data.maxCategory.categoria}
             />
           </div>
-        </div>
-      )
-              :
-              <>Aplicación tardará en iniciar ya que está hosteada gratis en render.com </>
-    }
+          <div className="relative w-[700px]">
+            <Line options={options} data={dataGraph} />
+          </div>
+        </>
+      ) : (
+        <>
+          Aplicación tardará en iniciar ya que está hosteada gratis en
+          render.com{" "}
+        </>
+      )}
     </>
   );
 };

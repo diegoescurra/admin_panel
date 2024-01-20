@@ -2,10 +2,11 @@ import { useCallback, useMemo, useState } from "react";
 import Table from "../components/Table";
 import { Link } from "react-router-dom";
 import useProduct from "../hooks/useProduct";
+import Loading from "../components/shared/Loading";
 
 export const Products = () => {
   const [searchInput, setSearchInput] = useState("");
-  const { state } = useProduct();
+  const { state, isLoading } = useProduct();
 
   const filteredProducts = useMemo(() => {
     return searchInput !== null && searchInput.length > 2

@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import useCategory from '../hooks/useCategory';
-import { insertCategory } from '../services/categoryRequest';
+import { insertCategory, updateCategory } from '../services/categoryRequest';
 
 const FormCategoria = () => {
 
@@ -22,10 +22,11 @@ const FormCategoria = () => {
 
   }
 
-  const update = (e) => {
+  const update = async (e)  => {
     e.preventDefault()
-    console.log(stateCategory.object[id])
-
+    const category = await updateCategory(form);
+    dispatchCategory({type : 'update', payload : category})
+    navigate('/categorias')
   }
 
   const handleClose = () => {
@@ -36,6 +37,13 @@ const FormCategoria = () => {
     setForm(prevState => ({...prevState, [prop]: e.target.value}))
   }
 
+  const categoryMemory = stateCategory.object[id];
+  useEffect(() => {
+   if (!id) return
+   setForm(categoryMemory)
+
+  }, [id, categoryMemory])
+  
   
   return (
     <form 
