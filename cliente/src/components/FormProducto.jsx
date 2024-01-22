@@ -15,12 +15,21 @@ const FormProducto = () => {
   const { stateCategory } = useCategory();
   const navigate = useNavigate();
   const categorias = Object.values(stateCategory.object);
+  
+
+
 
   const add = async (e) => {
     e.preventDefault();
-    const newProduct = await insertProducts(form);
-    dispatch({ type: "add", payload: newProduct });
-    navigate("/productos");
+    try {
+      const newProduct = await insertProducts(form);
+      dispatch({type: 'add', payload : newProduct})
+      navigate('/productos')
+    } catch (error) {
+      console.log(error)
+    }
+
+   
   };
 
   const update = async (e) => {
@@ -88,8 +97,10 @@ const FormProducto = () => {
               className="flex h-10 w-full rounded-md border border-input px-3 py-2 text-sm "
               placeholder="1000"
               required
-              type="number"
+              type="text"
               value={precio}
+              pattern="[0-9]+"
+              title="Solo ingrese números"
               onChange={(e) => onChange(e, "precio")}
             />
           </div>
