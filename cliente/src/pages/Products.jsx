@@ -51,16 +51,17 @@ export const Products = () => {
             to="/productos/agregar"
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            <span className="material-symbols-outlined">add</span> Añadir
-            Producto
+            <span className="material-symbols-outlined">add</span> 
+            <span className="hidden sm:block sm:text-sm">Añadir Producto</span>
+            
           </Link>
           <div className="relative w-full max-w-lg">
-            <span className="hidden lg:block material-symbols-outlined absolute p-1">
+            <span className="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
               search
             </span>
             <input
               type="text"
-              className="h-10 border border-gray-300 bg-white px-5 pr-10 text-sm rounded-lg shadow-sm w-full focus:outline-none focus:ring-2 focus:ring-gray-500 focus:gray-emerald-900"
+              className="pl-10 pr-3 py-2 border border-gray-300 bg-white text-sm rounded-full shadow-sm w-full focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-emerald-900"
               placeholder="Buscar producto..."
               onChange={(e) => setSearchInput(e.target.value)}
               value={searchInput}
