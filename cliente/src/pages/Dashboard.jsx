@@ -37,7 +37,7 @@ const Dashboard = () => {
     },
   };
 
-  const labels = data.soldProducts.map((sp) => sp.nombre_producto);
+  const labels = data ? data.soldProducts.map((sp) => sp.nombre_producto) : [];
 
   const dataGraph = {
     labels,
