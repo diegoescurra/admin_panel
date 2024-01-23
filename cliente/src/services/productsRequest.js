@@ -1,8 +1,8 @@
-const URL = "http://localhost:3000/productos";
+const URL = import.meta.env.URL || "http://localhost:3000/";
 
 export async function fetchProducts() {
   try {
-    const res = await fetch(URL);
+    const res = await fetch(URL + "productos");
     if (res.ok) {
       const json = await res.json();
       return json;
@@ -16,7 +16,7 @@ export async function fetchProducts() {
 
 export async function insertProducts(data) {
   try {
-    const res = await fetch(URL, {
+    const res = await fetch(URL + "productos", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -36,7 +36,7 @@ export async function insertProducts(data) {
 
 export async function updateProducts(data) {
   try {
-    const res = await fetch(URL, {
+    const res = await fetch(URL + "productos", {
       headers: {
         "Content-Type": "application/json",
       },

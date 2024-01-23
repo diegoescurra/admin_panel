@@ -1,9 +1,9 @@
-const URL = "http://localhost:3000/dashboard";
+const URL =  import.meta.env.URL || "http://localhost:3000/";
 
 
 export async function fetchDashboard() {
     try {
-        const res = await fetch(URL);
+        const res = await fetch(URL + "dashboard");
         if(res.ok){
             const json = await res.json();
             return json
