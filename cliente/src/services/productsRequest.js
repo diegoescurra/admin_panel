@@ -1,4 +1,4 @@
-const URL = import.meta.env.URL || "http://localhost:3000/";
+const URL = import.meta.env.VITE_URL || "http://localhost:3000/";
 
 export async function fetchProducts() {
   try {
