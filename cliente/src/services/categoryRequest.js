@@ -1,4 +1,4 @@
-const URL = "http://localhost:3000/categorias";
+const URL = "http://localhost:3000/categorias" || import.meta.env.URL;
 
 export async function fetchCategories() {
   try {
