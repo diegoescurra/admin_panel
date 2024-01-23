@@ -87,7 +87,7 @@ const Dashboard = () => {
               content={data.maxCategory.categoria}
             />
           </div>
-          <div className="relative w-[700px]">
+          <div className="relative lg:w-[700px] w-80">
             <Line options={options} data={dataGraph} />
           </div>
         </>

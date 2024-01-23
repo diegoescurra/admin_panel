@@ -46,14 +46,18 @@ export const Products = () => {
     <>
       <div className="flex flex-col p-6">
         <h3 className="text-2xl font-semibold mb-4">Gestión de Productos</h3>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           <Link
             to="/productos/agregar"
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            + Añadir Producto
+            <span className="material-symbols-outlined">add</span> Añadir
+            Producto
           </Link>
           <div className="relative w-full max-w-lg">
+            <span className="hidden lg:block material-symbols-outlined absolute p-1">
+              search
+            </span>
             <input
               type="text"
               className="h-10 border border-gray-300 bg-white px-5 pr-10 text-sm rounded-lg shadow-sm w-full focus:outline-none focus:ring-2 focus:ring-gray-500 focus:gray-emerald-900"
