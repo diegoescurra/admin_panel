@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import useCategory from '../hooks/useCategory';
 import { insertCategory, updateCategory } from '../services/categoryRequest';
 
@@ -29,10 +29,6 @@ const FormCategoria = () => {
     navigate('/categorias')
   }
 
-  const handleClose = () => {
-    navigate('/categorias')
-  }
-
   const handleChange = (e, prop) => {
     setForm(prevState => ({...prevState, [prop]: e.target.value}))
   }
@@ -52,6 +48,12 @@ const FormCategoria = () => {
     >
 
        <div className="flex flex-col space-y-1.5 p-6">
+       <Link
+          to={"/categorias"}
+          className="material-symbols-outlined absolute top-1 right-1 text-gray-400 rounded-full hover:bg-slate-300 hover:text-white transform ease-linear duration-75 cursor-pointer"
+        >
+          close
+        </Link>
           <h3 className="text-2xl font-semibold leading-none tracking-tight">
             Categoría
           </h3>
@@ -84,13 +86,7 @@ const FormCategoria = () => {
       >
         {!id ? 'Agregar Categoría' : 'Actualizar Categoría'}
       </button>
-      <button
-        onClick={handleClose}
-        type='button'
-        className='inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-400 text-white hover:bg-gray-700 h-10 px-4 py-2 w-full'
-      >
-        Cerrar
-      </button>
+     
      </div>
     </form>
   )

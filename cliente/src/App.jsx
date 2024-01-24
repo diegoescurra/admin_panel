@@ -7,6 +7,7 @@ import Categories from "./pages/Categories";
 import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
 import FormCategoria from "./components/FormCategoria";
+import FormStock from "./components/FormStock";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,14 @@ const router = createBrowserRouter([
           </Modal>
         ),
       },
+      {
+        path: "inventario/:id",
+        element: (
+          <Modal>
+            <FormStock />
+          </Modal>
+        )
+      }
     ],
   },
 ]);

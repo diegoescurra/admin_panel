@@ -60,7 +60,7 @@ const Dashboard = () => {
       {data ? (
         <>
           <div className="flex flex-col p-6">
-            <h3 className="text-2xl font-semibold mb-4 capitalize">
+            <h3 className="text-2xl font-semibold mb-4 capitalize shadow-sm border-b py-4">
               Dashboard de {nombre_mes}
             </h3>
           </div>

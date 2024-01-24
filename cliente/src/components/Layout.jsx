@@ -6,7 +6,7 @@ const Layout = () => {
   return (
     <>
       <Sidebar />
-      <main  className="rounded-lg border bg-card text-card-foreground shadow-sm ml-20 lg:ml-56 p-7">
+      <main  className="rounded-lg shadow-sm ml-20 lg:ml-56 p-7">
         <Outlet /> 
       </main>
     </>
