@@ -9,6 +9,7 @@ import Chart from "../components/Chart";
 const Dashboard = () => {
   const { data, isLoading } = useDashboard();
   console.log(data)
+  const labels = data ? data.soldProducts.map((sp) => sp.nombre_producto) : [];
 
   const options = {
     responsive: true,
@@ -20,20 +21,18 @@ const Dashboard = () => {
     },
   };
 
-  const labels = data ? data.soldProducts.map((sp) => sp.nombre_producto) : [];
-
   const dataGraph = {
     labels,
     datasets: [
       {
         label: "Productos Vendidos",
         data: data && data.soldProducts.map((sp) => sp.cantidad),
-        borderColor: "rgb(100, 255, 100)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderColor: "rgb(100, 210, 100)",
+        backgroundColor: "rgba(98, 99, 255, 0.7)",
       },
     ],
   };
-  const labelsD = data ? data.maxCategory.map((cg) => cg.categoria) : ['Hola'];
+  const labelsD = data ? data.maxCategory.map((cg) => cg.categoria) : [];
 
   const dataDonut = {
     labels: labelsD,
@@ -90,7 +89,7 @@ const Dashboard = () => {
           </div>
          <div className="flex gap-4">
          <Chart>
-            <Line options={options} data={dataGraph} />
+            <Line  options={options} data={dataGraph} />
           </Chart>
           <Chart>
           <Doughnut options={options} data={dataDonut}/>
