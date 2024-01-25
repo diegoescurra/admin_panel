@@ -1,31 +1,14 @@
 import Card from "../components/shared/Card";
-
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Doughnut, Line } from "react-chartjs-2";
 import useDashboard from "../hooks/useDashboard";
 import Loading from "../components/shared/Loading";
+import Chart from "../components/Chart";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+
 
 const Dashboard = () => {
   const { data, isLoading } = useDashboard();
+  console.log(data)
 
   const options = {
     responsive: true,
@@ -45,16 +28,31 @@ const Dashboard = () => {
       {
         label: "Productos Vendidos",
         data: data && data.soldProducts.map((sp) => sp.cantidad),
-        borderColor: "rgb(255, 99, 132)",
+        borderColor: "rgb(100, 255, 100)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
     ],
   };
+  const labelsD = data ? data.maxCategory.map((cg) => cg.categoria) : ['Hola'];
 
+  const dataDonut = {
+    labels: labelsD,
+    datasets: [{
+      label: 'Categorías',
+      data: data && data.maxCategory.map((cg) => cg.cantidad),
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+      ],
+      hoverOffset: 4
+    }]
+  };
   const fechaActual = new Date();
   const nombre_mes = fechaActual.toLocaleString("es", { month: "long" });
 
- if (isLoading) return <Loading />
+  if (isLoading) return <Loading />;
   return (
     <>
       {data ? (
@@ -78,8 +76,11 @@ const Dashboard = () => {
               })}
             />
             <Card
-              title={"Producto más vendido"}
-              content={data.producto.nombre_producto}
+              title={"Faltante"}
+              content={(30000000 - data.sumTotal.total).toLocaleString(
+                "es-CL",
+                { style: "currency", currency: "CLP" }
+              )}
             />
 
             <Card
@@ -87,9 +88,14 @@ const Dashboard = () => {
               content={data.maxCategory.categoria}
             />
           </div>
-          <div className="relative lg:w-[700px] w-80">
+         <div className="flex gap-4">
+         <Chart>
             <Line options={options} data={dataGraph} />
-          </div>
+          </Chart>
+          <Chart>
+          <Doughnut options={options} data={dataDonut}/>
+          </Chart>
+         </div>
         </>
       ) : (
         <>
