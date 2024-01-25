@@ -9,6 +9,7 @@ import {
   Legend,
   ArcElement,
 } from "chart.js";
+
 const Chart = ({ children }) => {
   ChartJS.register(
     CategoryScale,

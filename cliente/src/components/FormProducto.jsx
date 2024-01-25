@@ -34,9 +34,6 @@ const FormProducto = () => {
     navigate("/productos");
   };
 
-  const close = () => {
-    navigate("/productos");
-  };
 
   const productMemory = state.object[id];
   useEffect(() => {

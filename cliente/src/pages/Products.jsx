@@ -3,6 +3,7 @@ import Table from "../components/Table";
 import { Link } from "react-router-dom";
 import useProduct from "../hooks/useProduct";
 
+
 export const Products = () => {
   const [searchInput, setSearchInput] = useState("");
   const { state } = useProduct();
@@ -27,15 +28,18 @@ export const Products = () => {
     col4: product.categoria,
   }));
 
+
+
   const renderCell = useCallback(
     (id) => (
       <>
-        <Link
+         <Link
           to={`/productos/editar/${id}`}
           className="p-2"
         >
           <span className="material-symbols-outlined">edit</span>
-        </Link>
+        </Link> 
+  
         <Link 
           to={`/inventario/${id}`}
         className="p-2">
@@ -72,7 +76,6 @@ export const Products = () => {
           </div>
         </div>
       </div>
-
       <Table
         columns={["Producto", "Precio", "Categoría", "Acciones"]}
         rows={rows}

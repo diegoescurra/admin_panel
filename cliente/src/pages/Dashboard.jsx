@@ -2,7 +2,7 @@ import Card from "../components/shared/Card";
 import { Doughnut, Line } from "react-chartjs-2";
 import useDashboard from "../hooks/useDashboard";
 import Loading from "../components/shared/Loading";
-import Chart from "../components/Chart";
+import Chart from "../components/shared/Chart";
 
 
 
@@ -61,7 +61,7 @@ const Dashboard = () => {
               Dashboard de {nombre_mes}
             </h3>
           </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-screen-xl mx-auto p-4 mb-10">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-screen-xl mx-auto p-4 mb-10">
             <Card
               title={"Objetivo"}
               content={"$30.000.000"}
@@ -82,12 +82,8 @@ const Dashboard = () => {
               )}
             />
 
-            <Card
-              title={"Categoría más vendida"}
-              content={data.maxCategory.categoria}
-            />
           </div>
-         <div className="grid xl:flex gap-4">
+         <div className="grid lg:flex gap-4">
          <Chart>
             <Line  options={options} data={dataGraph} />
           </Chart>

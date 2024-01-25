@@ -2,7 +2,7 @@ const URL = import.meta.env.VITE_URL || "http://localhost:3000/" ;
 
 export async function fetchCategories() {
   try {
-    const res = await fetch(URL + "productos");
+    const res = await fetch(URL + "categorias");
     if (res.ok) {
       const json = await res.json();
       return json;
@@ -34,7 +34,7 @@ export async function insertCategory(data) {
 
 export async function updateCategory(data) {
   try {
-    const res = await fetch(URL + "productos", {
+    const res = await fetch(URL + "categorias", {
       headers: {
         "Content-Type" : "application/json",
       },

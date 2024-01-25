@@ -31,7 +31,7 @@ const FormStock = () => {
     >
       <div className="flex flex-col space-y-1.5 p-6 relative">
       <Link
-          to={"/productos"}
+          to={"/categorias"}
           className="material-symbols-outlined absolute top-1 right-1 text-gray-400 rounded-full hover:bg-slate-300 hover:text-white transform ease-linear duration-75 cursor-pointer"
         >
           close
