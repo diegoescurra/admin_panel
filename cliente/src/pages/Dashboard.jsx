@@ -87,7 +87,7 @@ const Dashboard = () => {
               content={data.maxCategory.categoria}
             />
           </div>
-         <div className="flex gap-4">
+         <div className="grid xl:flex gap-4">
          <Chart>
             <Line  options={options} data={dataGraph} />
           </Chart>
