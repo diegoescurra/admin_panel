@@ -31,8 +31,8 @@ const Categories = () => {
             to="/categorias/agregar"
             className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            <span className="material-symbols-outlined">add</span> Añadir
-            Categoría
+            <span className="material-symbols-outlined">add</span> 
+            <span className="hidden text-sm sm:block">Añadir Categoría</span>
           </Link>
           <div className="relative w-full max-w-lg"></div>
         </div>
