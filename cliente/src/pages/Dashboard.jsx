@@ -37,7 +37,7 @@ const Dashboard = () => {
   const dataDonut = {
     labels: labelsD,
     datasets: [{
-      label: 'Categorías',
+      label: 'Cantidad Vendida',
       data: data && data.maxCategory.map((cg) => cg.cantidad),
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
@@ -57,7 +57,7 @@ const Dashboard = () => {
       {data ? (
         <>
           <div className="flex flex-col p-6">
-            <h3 className="text-2xl font-semibold mb-4 capitalize shadow-sm border-b py-4">
+            <h3 className="text-2xl font-bold mb-4 capitalize shadow-sm border-b py-4 font-roboto">
               Dashboard de {nombre_mes}
             </h3>
           </div>

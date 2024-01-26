@@ -3,7 +3,7 @@ import "./sidebar.css";
 
 const Sidebar = () => {
   return (
-    <aside className="flex flex-col h-screen bg-gray-100 w-20 lg:w-56 fixed">
+    <aside className="flex flex-col h-screen bg-zinc-950  w-20 lg:w-56 fixed text-white">
       <header className="flex items-center justify-between px-6 py-4 border-b dark:border-gray-700">
         <span className="text-sm lg:text-lg font-semibold">Admin Panel</span>
       </header>
