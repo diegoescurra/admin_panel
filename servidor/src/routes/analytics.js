@@ -15,12 +15,21 @@ router.get('/dashboard', async (req, res) => {
         ON c.id_categoria = p.id_categoria
         JOIN venta_detalle v
         ON v.id_producto = p.id_producto
+        JOIN venta 
+        ON venta.id_venta = v.id_venta
+		WHERE EXTRACT (MONTH FROM fecha) = EXTRACT(MONTH FROM NOW())
         GROUP BY categoria
         ORDER BY cantidad DESC`
         const maxCategory = await pool.query(sqlMaxCategory);
 
 
-        const sqlProducts = 'SELECT p.nombre_producto, SUM(v.cantidad ) AS cantidad FROM producto p JOIN venta_detalle v ON p.id_producto = v.id_producto GROUP BY nombre_producto ORDER BY cantidad'
+        const sqlProducts = `SELECT p.nombre_producto, SUM(v.cantidad ) AS cantidad 
+        FROM producto p 
+        JOIN venta_detalle v 
+        ON p.id_producto = v.id_producto 
+        JOIN venta ON v.id_venta = venta.id_venta
+        WHERE EXTRACT(MONTH FROM fecha) = EXTRACT(MONTH FROM NOW())
+        GROUP BY nombre_producto ORDER BY cantidad`
         const soldProducts = await pool.query(sqlProducts)
 
         return res.status(200).json({
