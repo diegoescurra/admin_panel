@@ -6,7 +6,7 @@ import { Toaster } from "sonner";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <AppProvider>
-    <Toaster position="top-right" />
+    <Toaster position="top-right" closeButton={true} style={{width: '14rem'}}/>
     <App />
   </AppProvider>
 );
