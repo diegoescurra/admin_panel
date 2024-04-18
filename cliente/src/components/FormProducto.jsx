@@ -3,6 +3,7 @@ import { insertProducts, updateProducts } from "../services/productsRequest";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useProduct from "../hooks/useProduct";
 import useCategory from "../hooks/useCategory";
+import { toast } from 'sonner';
 
 const FormProducto = () => {
   const [form, setForm] = useState({
@@ -16,22 +17,32 @@ const FormProducto = () => {
   const navigate = useNavigate();
   const categorias = Object.values(stateCategory.object);
 
+
+
   const add = async (e) => {
     e.preventDefault();
     try {
       const newProduct = await insertProducts(form);
       dispatch({ type: "add", payload: newProduct });
+      toast.success('Producto agregado')
       navigate("/productos");
     } catch (error) {
+      toast.error('Ha ocurrido un error')
       console.log(error);
     }
   };
 
   const update = async (e) => {
     e.preventDefault();
-    const updatedProduct = await updateProducts(form);
-    dispatch({ type: "update", payload: updatedProduct });
-    navigate("/productos");
+    try {
+      const updatedProduct = await updateProducts(form);
+      dispatch({ type: "update", payload: updatedProduct });
+      toast.success('Producto Actualizado')
+      navigate("/productos");
+    } catch (error) {
+      toast.error('Ha ocurrido un error')
+      console.log(error)
+    }
   };
 
 

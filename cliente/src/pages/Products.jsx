@@ -2,12 +2,9 @@ import { useCallback, useMemo, useState } from "react";
 import Table from "../components/Table";
 import { Link } from "react-router-dom";
 import useProduct from "../hooks/useProduct";
-
-
 export const Products = () => {
   const [searchInput, setSearchInput] = useState("");
   const { state } = useProduct();
-
   const filteredProducts = useMemo(() => {
     return searchInput !== null && searchInput.length > 2
       ? Object.values(state.object).filter((product) => {
@@ -27,6 +24,7 @@ export const Products = () => {
     }),
     col4: product.categoria,
   }));
+
 
 
 
