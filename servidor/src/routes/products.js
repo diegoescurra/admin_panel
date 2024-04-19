@@ -23,7 +23,7 @@ router.post('/productos', async (req, res) => {
         return res.status(200).json(newProduct.rows[0]);
 
     } catch (error) {
-        return res.sendStatus(500).send(error);
+        return res.status(500).send('Lo sentimos, ha ocurrido un error');
     }
 });
 
@@ -51,6 +51,8 @@ router.delete('/productos', async (req, res) => {
     return res.status(200);
   } catch (error) {
     console.log(error)
+    return res.status(500).send('Lo sentimos, ha ocurrido un error')
+        
   }
 })
 

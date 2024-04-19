@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 const FormProducto = () => {
   const [form, setForm] = useState({
     nombre_producto: "",
-    precio: 0,
+    precio: "",
     id_categoria: 1,
   });
   const { id } = useParams();
@@ -16,12 +16,13 @@ const FormProducto = () => {
   const { stateCategory } = useCategory();
   const navigate = useNavigate();
   const categorias = Object.values(stateCategory.object);
-
+  const [disabled, setDisabled] = useState(false)
 
 
   const add = async (e) => {
     e.preventDefault();
     try {
+      setDisabled(true)
       const newProduct = await insertProducts(form);
       dispatch({ type: "add", payload: newProduct });
       toast.success('Producto agregado')
@@ -35,6 +36,7 @@ const FormProducto = () => {
   const update = async (e) => {
     e.preventDefault();
     try {
+      setDisabled(true)
       const updatedProduct = await updateProducts(form);
       dispatch({ type: "update", payload: updatedProduct });
       toast.success('Producto Actualizado')
@@ -142,6 +144,7 @@ const FormProducto = () => {
         <button
           className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-slate-900 text-white hover:bg-slate-700 h-10 px-4 py-2 w-full"
           type="submit"
+          disabled={disabled}
         >
           {id ? "Actualizar Producto" : "Agregar Producto"}
         </button>

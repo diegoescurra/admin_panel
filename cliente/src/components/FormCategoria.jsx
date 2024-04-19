@@ -9,13 +9,14 @@ const FormCategoria = () => {
     categoria: "",
   });
   const { stateCategory, dispatchCategory } = useCategory();
-
+  const [disabled, setDisabled] = useState(false)
   const { id } = useParams();
   const navigate = useNavigate();
 
   const add = async (e) => {
     e.preventDefault();
     try {
+      setDisabled(true)
       const category = await insertCategory(form);
       dispatchCategory({ type: "add", payload: category });
       toast.success("Categoría Agregada");
@@ -29,6 +30,7 @@ const FormCategoria = () => {
   const update = async (e) => {
     e.preventDefault();
     try {
+      setDisabled(true)
       const category = await updateCategory(form);
       dispatchCategory({ type: "update", payload: category });
       toast.success("Categoría Actualizada");
@@ -48,6 +50,7 @@ const FormCategoria = () => {
     if (!id) return;
     setForm(categoryMemory);
   }, [id, categoryMemory]);
+
 
   return (
     <form
@@ -90,6 +93,7 @@ const FormCategoria = () => {
         <button
           type="submit"
           className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-slate-900 text-white hover:bg-slate-700 h-10 px-4 py-2 w-full"
+          disabled={disabled}
         >
           {!id ? "Agregar Categoría" : "Actualizar Categoría"}
         </button>
