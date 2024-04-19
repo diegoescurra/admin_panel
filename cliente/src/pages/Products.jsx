@@ -50,7 +50,7 @@ export const Products = () => {
 
   return (
     <>
-      <div className="flex flex-col p-6 w-full">
+      <div className="grid w-80 md:w-96 lg:w-full p-4">
         <h3 className="text-2xl font-bold font-roboto mb-4 shadow-sm border-b py-4">Gestión de Productos</h3>
         <div className="flex items-center justify-between gap-4 w-full">
           <Link

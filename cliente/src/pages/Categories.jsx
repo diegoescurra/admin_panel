@@ -24,7 +24,7 @@ const Categories = () => {
 
   return (
     <>
-      <div className="flex flex-col p-6">
+      <div className="flex flex-col p-4">
         <h3 className="text-2xl font-roboto font-bold mb-4 shadow-sm border-b py-4">Gestión de Categorías</h3>
         <div className="flex items-center justify-between">
           <Link

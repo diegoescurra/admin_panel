@@ -4,12 +4,12 @@ import Sidebar from './Sidebar';
 
 const Layout = () => {
   return (
-    <>
+    <div className='flex max-w-full overflow-y-hidden'>
       <Sidebar />
-      <main  className="rounded-lg bg-white shadow-sm ml-20 lg:ml-56 p-7 min-h-screen w-full sm:w-auto">
-        <Outlet /> 
-      </main>
-    </>
+      <main className="flex-grow rounded-lg bg-white shadow-sm p-7 w-full h-auto">
+  <Outlet /> 
+</main>
+    </div>
   );
 };
 

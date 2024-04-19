@@ -13,7 +13,7 @@ const Table = ({rows, columns, renderCell }) => {
 
   return (
 <>
-<table className="min-w-full divide-y divide-gray-200">
+<table className=" divide-y divide-gray-200">
   <thead className="bg-gray-50">
     <tr>
       {columns.map((title, index) => (
@@ -52,7 +52,7 @@ const Table = ({rows, columns, renderCell }) => {
           disabled={currentPage === 0}
           className="p-2 border rounded text-xs bg-gray-200 hover:bg-gray-300 disabled:bg-gray-200"
         >
-          Anterior
+         {'<-'}
         </button>
         <span className="text-xs">Página {currentPage + 1} de {Math.ceil(rows.length / rowsPerPage)}</span>
         <button 
@@ -60,7 +60,7 @@ const Table = ({rows, columns, renderCell }) => {
           disabled={currentPage >= Math.ceil(rows.length / rowsPerPage) - 1}
           className="p-2 border rounded text-xs bg-gray-200 hover:bg-gray-300 disabled:bg-gray-200"
         >
-          Siguiente
+           {'->'}
         </button>
       </div>
    
