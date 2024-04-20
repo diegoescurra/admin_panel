@@ -39,7 +39,7 @@ const Categories = () => {
       </div>
 
       <Table
-        columns={["Categoria", "Acciones"]}
+        columns={["Código","Categoria", "Acciones"]}
         rows={rows}
         renderCell={renderCell}
       />

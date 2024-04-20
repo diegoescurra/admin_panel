@@ -75,7 +75,7 @@ export const Products = () => {
         </div>
       </div>
       <Table
-        columns={["Producto", "Precio", "Categoría", "Acciones"]}
+        columns={["Código","Producto", "Precio", "Categoría", "Acciones"]}
         rows={rows}
         renderCell={renderCell}
       />
