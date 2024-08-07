@@ -141,7 +141,7 @@ const Dashboard = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="total" fill="#00aae4" activeBar={<Rectangle fill="pink" stroke="blue" />} />
+          <Bar dataKey="total" fill="#00aae4" activeBar={<Rectangle fill="white" stroke="orange" />} />
         </BarChart>
       </ResponsiveContainer>
       </article>

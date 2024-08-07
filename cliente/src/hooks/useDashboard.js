@@ -6,7 +6,8 @@ const useDashboard = () => {
     const [data, setData] = useState({
         sumTotal: {},
         maxCategory: [],
-        soldProducts : []
+        soldProducts : [],
+        totalClients: []
       });
       const [isLoading, setIsLoading] = useState(false);
 
