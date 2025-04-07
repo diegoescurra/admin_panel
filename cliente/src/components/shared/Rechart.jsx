@@ -1,60 +1,68 @@
-import React, { PureComponent } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, Rectangle } from 'recharts';
 
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
 
-export default class Example extends PureComponent {
+const MyComponent = ({ productosVendidos, categoriasVendidas, totalClientes }) => {
 
-  render() {
+console.log(totalClientes)
+
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
+  const renderLegend = (props) => {
+    const { payload } = props;
     return (
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart
+      <div className="flex justify-center items-center text-xs md:text-base gap-2  sm:gap-4 ">
+        {
+          payload.map((entry, index) => (
+            <span key={`item-${index}`} style={{ color: entry.color }}>
+              <span style={{ color: entry.color, marginRight: 8 }}>■</span>
+              {entry.payload.categoria}
+            </span>
+          ))
+        }
+      </div>
+    );
+  };
+
+  const graficos = [
+    {
+      id: 1,
+      component: (
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={productosVendidos}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="nombre_producto" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="cantidad" stroke="#8884d8" activeDot={{ r: 8 }} />
+          </LineChart>
+        </ResponsiveContainer>
+      ),
+    },
+    {
+      id: 2,
+      component: (
+        <ResponsiveContainer width="100%" height={300}>
+          <PieChart>
+            <Pie data={categoriasVendidas} cx="50%" cy="50%" labelLine={false} label outerRadius={80} fill="#8884d8" dataKey="cantidad">
+              {categoriasVendidas.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+            <Legend content={renderLegend} />
+          </PieChart>
+        </ResponsiveContainer>
+      ),
+    },
+    {
+      id: 3,
+      component: (
+      
+         <ResponsiveContainer width="100%" height="100%">
+        <BarChart
           width={500}
           height={300}
-          data={data}
+          data={totalClientes}
           margin={{
             top: 5,
             right: 30,
@@ -63,14 +71,27 @@ export default class Example extends PureComponent {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="nombre"/>
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-        </LineChart>
+          <Bar dataKey="total" fill="#14213D" activeBar={<Rectangle fill="white" stroke="orange" />} />
+        </BarChart>
       </ResponsiveContainer>
-    );
-  }
-}
+      
+      ),
+    },
+  ];
+
+  return (
+    <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-full h-[56rem] lg:h-96 '>
+      {graficos.map((grafico) => (
+        <div key={grafico.id} >
+          {grafico.component}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default MyComponent;
