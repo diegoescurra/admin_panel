@@ -44,7 +44,7 @@ router.get("/dashboard", async (req, res) => {
       totalClients: totalClients.rows
     });
   } catch (error) {
-    return res.status(500).send("Lo sentimos, ha ocurrido un error");
+    return res.status(500).send("Lo sentimos, ha ocurrido un error:" + error);
   }
 });
 
